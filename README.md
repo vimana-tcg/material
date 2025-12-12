@@ -156,7 +156,14 @@ Telegram-бот, який:
 * redis
 * object storage
 
-## 11. Acceptance Criteria
+## 11. Запуск (мінімально)
+1. Підготуй секрети у `.env` для кожного сервісу: `TELEGRAM_TOKEN`, `OPENAI_API_KEY` (або інший LLM), `DATABASE_URL`, `VECTOR_DB_URL`, `REDIS_URL`, `S3_ENDPOINT/S3_KEY/S3_SECRET`, `ALLOWED_CHAT_IDS` (для адмінів).
+2. Розгорни інфраструктуру через Docker Compose з сервісами `bot`, `worker`, `postgres`, `qdrant/pgvector`, `redis`, `minio`.
+3. Виконай міграції БД (alembic/SQL скрипти) та створення векторних індексів.
+4. Запусти `bot-service` (aiogram + webhooks/polling) і `worker-service` (черги для PDF/фото/голосу) з однаковим `.env`.
+5. Перевір `/start`, обробку фото/PDF/голосу та адмін-команди `/stats`, `/reindex`.
+
+## 12. Acceptance Criteria
 Проєкт вважається готовим, якщо:
 * бот приймає текст / фото / PDF / голос
 * дає точні технічні відповіді українською
